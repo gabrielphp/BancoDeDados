@@ -1,0 +1,91 @@
+create database biblioteca;
+use biblioteca;
+
+CREATE TABLE livro (
+CodLi int PRIMARY KEY auto_increment,
+autor varchar(255),
+editora varchar(255),
+titulo varchar(255) unique,
+genero varchar(255)
+);
+
+CREATE TABLE bibliotecario (
+CodBi int PRIMARY KEY auto_increment,
+dataNascimento date,
+email varchar(255) unique,
+telefone varchar(255),
+RG varchar(255) unique,
+nome varchar(255),
+CPF varchar(255) unique,
+estado varchar(255),
+cidade varchar(255),
+bairro varchar(255),
+ruaavenida varchar(255),
+numero varchar(255),
+complemento varchar(255),
+CEP varchar(255)
+);
+
+CREATE TABLE leitor (
+CodCli int PRIMARY KEY auto_increment,
+generoFav varchar(255),
+dataNasc date,
+CPF varchar(255) unique,
+nome varchar(255),
+email varchar(255) unique,
+telefone varchar(255),
+RG varchar(255) unique
+);
+
+CREATE TABLE emprestado_devolvido (
+Empr date,
+Dev date,
+codEmprestimo int PRIMARY KEY auto_increment,
+Li int,
+Cli int,
+Bi int,
+FOREIGN KEY(Li) REFERENCES livro (CodLi),
+FOREIGN KEY(Cli) REFERENCES leitor (CodCli),
+FOREIGN KEY(Bi) REFERENCES bibliotecario (CodBi)
+);
+
+insert into bibliotecario (nome, email, telefone, dataNascimento, CPF, estado, cidade) values
+('Marcelo Martin Araújo','marcelo@gmail.com','985423168','1982-02-18','065.026.454-10','São Paulo','Ribeirão Pires');
+
+insert into leitor (nome, email, telefone, RG, CPF, dataNasc, generoFav) values
+('Levi Nathan da Luz','levi@gmail.com','946217845','508907962','64041970814','1974-01-07','Terror'),
+('Benício Vitor Isaac Jesus','beni@gmail.com','987512354','191273193','52316820395','1986-08-21','Romance'),
+('Felipe Eduardo Aparício','felipe@gmail.com','921546387','148694329','40093338716','1996-06-13','Ficção'),
+('Lavínia Nicole Barros','lavi@gmail.com','968457126','489381339','49164229610','2000-08-16','Terror'),
+('Lavínia Regina Figueiredo','lavinia@gmail.com','994512687','240091292','57798562818','1953-12-08','Filosofia'),
+('Ayla Aline Assunção','ayla@gmail.com','994215836','271340162','85341712463','2004-03-15','Mistério'),
+('Amanda Nina Monteiro','amanda@gmail.com','999421586','468134785','90606933883','1945-12-07','Romance'),
+('Ruan Pietro Davi da Mota','ruan@gmail.com','985210357','409533555','76470970168','1993-06-01','Graphic Novel'),
+('Enzo Carlos Eduardo Osvaldo Rocha','enzo@gmail.com','984235146','227148381','38008619414','2008-01-20','Ciências'),
+('Betina Rita Vieira','betina@gmail.com','985632157','325066152','92046458141','1986-08-17','Mistério');
+
+insert into livro (autor, titulo, editora, genero) values
+('David Lagercrantz','Os homens que não amavam mulheres','Companhia das letras','Mistério'),
+('Robert Bryndza','Sangue Frio','Gutenberg','Mistério'),
+('Stephenie Meyer','Sol da meia-noite','Intrínseca','Romance'),
+('Paula Pimenta','Cinderela Pop','Galera','Romance'),
+('Art Spiegelman','Maus','Quadrinhos na Cia','HQ'),
+('John Scalzi','Guerra do velho','Editora Aleph','Ficção ciêntifica'),
+('H.P. Lovecraft','Lovecraft: Medo clássico','Darkside','Terror'),
+('John Fowles','O colecionador','Darkside','Terror'),
+('Nietzche','O anticristo','Lafonte','Filosofia'),
+('Carl Sagan','Cosmos','Companhia das letras','Ciências');
+
+insert into emprestado_devolvido (Li, Cli, Bi, Empr, Dev) values
+(1,1,1,'2020-06-01','2020-06-10'),
+(2,2,1,'2020-06-24','2020-07-10'),
+(3,3,1,'2020-05-29','2020-06-02'),
+(4,4,1,'2020-11-10','2020-11-24'),
+(5,5,1,'2020-01-14','2020-01-21'),
+(6,6,1,'2020-10-12','2020-10-19'),
+(7,7,1,'2020-02-03','2020-02-10'),
+(8,8,1,'2020-04-09','2020-04-16'),
+(9,9,1,'2020-12-10','2020-12-17'),
+(10,10,1,'2020-01-30','2020-02-06');
+
+
