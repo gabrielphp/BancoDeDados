@@ -50,7 +50,9 @@ FOREIGN KEY(Bi) REFERENCES bibliotecario (CodBi)
 );
 
 insert into bibliotecario (nome, email, telefone, dataNascimento, CPF, estado, cidade) values
-('Marcelo Martin Araújo','marcelo@gmail.com','985423168','1982-02-18','065.026.454-10','São Paulo','Ribeirão Pires');
+('Marcelo Martin Araújo','marcelo@gmail.com','985423168','1982-02-18','065.026.454-10','São Paulo','Ribeirão Pires'),
+('Rodrigo Alberto','rodris@gmail.com','945219876','1996-10-08','146.876.315-02','São Paulo','Mauá'),
+('Júlia Carvalho','julinhas@gmail.com','932146578','1998-01-26','316.421.875-13','São Paulo','Ribeirão Pires');
 
 insert into leitor (nome, email, telefone, RG, CPF, dataNasc, generoFav) values
 ('Levi Nathan da Luz','levi@gmail.com','946217845','508907962','64041970814','1974-01-07','Terror'),
