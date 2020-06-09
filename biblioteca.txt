@@ -1,12 +1,14 @@
 create database biblioteca;
 use biblioteca;
 
-CREATE TABLE livro (
+CREATE TABLE livros (
 CodLi int PRIMARY KEY auto_increment,
 autor varchar(255),
 editora varchar(255),
-titulo varchar(255) unique,
-genero varchar(255)
+titulo varchar(255),
+genero varchar(255),
+pag varchar(255),
+exe varchar(255)
 );
 
 CREATE TABLE bibliotecario (
@@ -34,7 +36,9 @@ CPF varchar(255) unique,
 nome varchar(255),
 email varchar(255) unique,
 telefone varchar(255),
-RG varchar(255) unique
+RG varchar(255) unique,
+turma char(2), 
+ra varchar(255)
 );
 
 CREATE TABLE emprestado_devolvido (
@@ -44,7 +48,7 @@ codEmprestimo int PRIMARY KEY auto_increment,
 Li int,
 Cli int,
 Bi int,
-FOREIGN KEY(Li) REFERENCES livro (CodLi),
+FOREIGN KEY(Li) REFERENCES livros (CodLi),
 FOREIGN KEY(Cli) REFERENCES leitor (CodCli),
 FOREIGN KEY(Bi) REFERENCES bibliotecario (CodBi)
 );
@@ -54,40 +58,40 @@ insert into bibliotecario (nome, email, telefone, dataNascimento, CPF, estado, c
 ('Rodrigo Alberto','rodris@gmail.com','945219876','1996-10-08','146.876.315-02','São Paulo','Mauá'),
 ('Júlia Carvalho','julinhas@gmail.com','932146578','1998-01-26','316.421.875-13','São Paulo','Ribeirão Pires');
 
-insert into leitor (nome, email, telefone, RG, CPF, dataNasc, generoFav) values
-('Levi Nathan da Luz','levi@gmail.com','946217845','508907962','64041970814','1974-01-07','Terror'),
-('Benício Vitor Isaac Jesus','beni@gmail.com','987512354','191273193','52316820395','1986-08-21','Romance'),
-('Felipe Eduardo Aparício','felipe@gmail.com','921546387','148694329','40093338716','1996-06-13','Ficção'),
-('Lavínia Nicole Barros','lavi@gmail.com','968457126','489381339','49164229610','2000-08-16','Terror'),
-('Lavínia Regina Figueiredo','lavinia@gmail.com','994512687','240091292','57798562818','1953-12-08','Filosofia'),
-('Ayla Aline Assunção','ayla@gmail.com','994215836','271340162','85341712463','2004-03-15','Mistério'),
-('Amanda Nina Monteiro','amanda@gmail.com','999421586','468134785','90606933883','1945-12-07','Romance'),
-('Ruan Pietro Davi da Mota','ruan@gmail.com','985210357','409533555','76470970168','1993-06-01','Graphic Novel'),
-('Enzo Carlos Eduardo Osvaldo Rocha','enzo@gmail.com','984235146','227148381','38008619414','2008-01-20','Ciências'),
-('Betina Rita Vieira','betina@gmail.com','985632157','325066152','92046458141','1986-08-17','Mistério');
+insert into leitor (nome, email, telefone, RG, CPF, dataNasc, generoFav, turma, ra) values
+('Levi Nathan da Luz','levi@gmail.com','946217845','508907962','64041970814','2004-01-07','Terror', '2C', '19162'),
+('Benício Vitor Isaac Jesus','beni@gmail.com','987512354','191273193','52316820395','2003-08-21','Romance', '3C', '18123'),
+('Felipe Eduardo Aparício','felipe@gmail.com','921546387','148694329','40093338716','2005-06-13','Ficção', '1A', '20173'),
+('Lavínia Nicole Barros','lavi@gmail.com','968457126','489381339','49164229610','2002-08-16','Terror', '3I', '18243'),
+('Lavínia Regina Figueiredo','lavinia@gmail.com','994512687','240091292','57798562818','2004-12-08','Filosofia', '2B', '19543'),
+('Ayla Aline Assunção','ayla@gmail.com','994215836','271340162','85341712463','2004-03-15','Mistério', '1F', '20174'),
+('Amanda Nina Monteiro','amanda@gmail.com','999421586','468134785','90606933883','2003-12-07','Romance', '3C', '18149'),
+('Ruan Pietro Davi da Mota','ruan@gmail.com','985210357','409533555','76470970168','2001-06-01','Graphic Novel', '3A', '17143'),
+('Enzo Carlos Eduardo Osvaldo Rocha','enzo@gmail.com','984235146','227148381','38008619414','2005-01-20','Ciências', '1B', '20183'),
+('Betina Rita Vieira','betina@gmail.com','985632157','325066152','92046458141','2005-08-17','Mistério', '1C', '20413');
 
-insert into livro (autor, titulo, editora, genero) values
-('David Lagercrantz','Os homens que não amavam mulheres','Companhia das letras','Mistério'),
-('Robert Bryndza','Sangue Frio','Gutenberg','Mistério'),
-('Stephenie Meyer','Sol da meia-noite','Intrínseca','Romance'),
-('Paula Pimenta','Cinderela Pop','Galera','Romance'),
-('Art Spiegelman','Maus','Quadrinhos na Cia','HQ'),
-('John Scalzi','Guerra do velho','Editora Aleph','Ficção ciêntifica'),
-('H.P. Lovecraft','Lovecraft: Medo clássico','Darkside','Terror'),
-('John Fowles','O colecionador','Darkside','Terror'),
-('Nietzche','O anticristo','Lafonte','Filosofia'),
-('Carl Sagan','Cosmos','Companhia das letras','Ciências');
+insert into livros (autor, titulo, editora, genero, pag, exe) values
+('David Lagercrantz','Os homens que não amavam mulheres','Companhia das letras','Mistério', '528', '13'),
+('Robert Bryndza','Sangue Frio','Gutenberg','Mistério', '343', '2'),
+('Stephenie Meyer','Sol da meia-noite','Intrínseca','Romance', '736', '12'),
+('Paula Pimenta','Cinderela Pop','Galera','Romance', '160', '8'),
+('Art Spiegelman','Maus','Quadrinhos na Cia','HQ', '296', '3'),
+('John Scalzi','Guerra do velho','Editora Aleph','Ficção ciêntifica', '368', '1'),
+('H.P. Lovecraft','Lovecraft: Medo clássico','Darkside','Terror', '384', '2'),
+('John Fowles','O colecionador','Darkside','Terror', '256', '3'),
+('Nietzche','O anticristo','Lafonte','Filosofia', '128', '5'),
+('Carl Sagan','Cosmos','Companhia das letras','Ciências', '560', '5');
 
 insert into emprestado_devolvido (Li, Cli, Bi, Empr, Dev) values
 (1,1,1,'2020-06-01','2020-06-10'),
 (2,2,1,'2020-06-24','2020-07-10'),
-(3,3,1,'2020-05-29','2020-06-02'),
-(4,4,1,'2020-11-10','2020-11-24'),
+(3,3,1,'2018-05-29','2018-06-02'),
+(4,4,1,'2010-11-10','2010-11-24'),
 (5,5,1,'2020-01-14','2020-01-21'),
-(6,6,1,'2020-10-12','2020-10-19'),
+(6,6,1,'2019-10-12','2019-10-19'),
 (7,7,1,'2020-02-03','2020-02-10'),
 (8,8,1,'2020-04-09','2020-04-16'),
-(9,9,1,'2020-12-10','2020-12-17'),
+(9,9,1,'2015-12-10','2015-12-17'),
 (10,10,1,'2020-01-30','2020-02-06');
 
 
